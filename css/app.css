@@ -1,0 +1,15 @@
+#bar-chart {
+	width: 90vw;
+	height: 60vh;
+}
+
+@media (min-width: 992px) {
+	#bar-chart {
+		width: 70vw;
+	}
+}
+@media (min-width: 768px) {
+	#bar-chart {
+		width: 80vw;
+	}
+}
