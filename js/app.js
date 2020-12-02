@@ -18,6 +18,25 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function renderData(xData, yData) {
-	console.log(xData);
-	console.log(yData);
+	const svg = d3.select("svg");
+
+	let width = svg.style("width");
+	width = +width.substring(0, width.indexOf("px"));
+
+	let height = svg.style("height")
+	height = +height.substring(0, height.indexOf("px"));
+
+	padding = 60;
+
+	const xScale = d3.scaleBand()
+					 .domain(xData)
+					 .range([padding, width - padding])
+					 .padding(0.3)
+					 .round(true);
+
+	const yScale = d3.scaleLinear()
+					 .domain([0, d3.max(yData)])
+					 .range([height - padding, padding]);
+
+	
 }
