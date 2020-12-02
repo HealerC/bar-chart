@@ -35,5 +35,12 @@ function renderData(data) {
 					 .domain([0, d3.max(data.map(d => d[1]))])
 					 .range([height - padding, padding]);
 
-	
+	svg.selectAll("rect")
+	   .data(data)
+	   .enter()
+	   .append("rect")
+	   .attr("x", (d) => xScale(d[0]))
+	   .attr("y", (d) => yScale(d[1]))
+	   .attr("width", xScale.bandwidth())
+	   .attr("height", (d) => height-padding - yScale(d[1]));
 }
