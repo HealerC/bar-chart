@@ -11,13 +11,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	fetch("./GDP-data.json")
 	    .then(result => result.json())
 	    .then(data => {
-	    	const xData = data.data.map(d => d[0]);
-	    	const yData = data.data.map(d => d[1]);
-	    	renderData(xData, yData);
+	    	renderData(data.data);
 	    });
 });
 
-function renderData(xData, yData) {
+function renderData(data) {
 	const svg = d3.select("svg");
 
 	let width = svg.style("width");
@@ -27,15 +25,14 @@ function renderData(xData, yData) {
 	height = +height.substring(0, height.indexOf("px"));
 
 	padding = 60;
-
 	const xScale = d3.scaleBand()
-					 .domain(xData)
+					 .domain(data.map(d => d[0]))
 					 .range([padding, width - padding])
 					 .padding(0.3)
 					 .round(true);
 
 	const yScale = d3.scaleLinear()
-					 .domain([0, d3.max(yData)])
+					 .domain([0, d3.max(data.map(d => d[1]))])
 					 .range([height - padding, padding]);
 
 	
