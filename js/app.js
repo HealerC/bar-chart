@@ -5,3 +5,19 @@ tippy("#more-info", {
 	interactive: true,
 	allowHTML: true
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+
+	fetch("./GDP-data.json")
+	    .then(result => result.json())
+	    .then(data => {
+	    	const xData = data.data.map(d => d[0]);
+	    	const yData = data.data.map(d => d[1]);
+	    	renderData(xData, yData);
+	    });
+});
+
+function renderData(xData, yData) {
+	console.log(xData);
+	console.log(yData);
+}
