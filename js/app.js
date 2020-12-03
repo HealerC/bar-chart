@@ -44,6 +44,8 @@ function renderData(data) {
 	   .attr("height", (d) => height-padding - yScale(d[1]))
 
 	const { xg, yg } = renderAxis(svg, xScale, yScale, { height, padding });
+	renderAxisLabel(xg, yg, { width, height });
+
 }
 
 function renderAxis(svg, xScale, yScale, dimensions) {
@@ -85,5 +87,21 @@ function renderAxis(svg, xScale, yScale, dimensions) {
 			return false;
 		}
 	}
-	return { xg, yg }
+	return { xg, yg };
+}
+function renderAxisLabel(xg, yg, dimensions) {
+	const { width, height } = dimensions;
+	xg.append("text")
+	  .attr("fill", "black")
+	  .text("Year (Quaterly from 1947 to 2015)")
+	  .attr("x", width/2)
+	  .attr("y", 35);
+
+	yg.append("text")
+	  .attr("fill", "black")
+	  .text("Gross Domestic Product (billions of dollars)")
+	  .attr("class", "y-label")
+	  .attr("x", -(height-200)/2)
+	  .attr("y", -50)
+	  .attr("transform", `rotate(-90)`);
 }
