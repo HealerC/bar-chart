@@ -25,7 +25,7 @@ function renderData(data) {
 	let height = svg.style("height")
 	height = +height.substring(0, height.indexOf("px"));
 
-	padding = 60;
+	padding = 63;
 	const xScale = d3.scaleBand()
 					 .domain(data.map(d => d[0]))
 					 .range([padding, width - padding])
@@ -94,16 +94,15 @@ function renderAxis(svg, xScale, yScale, dimensions) {
 function renderAxisLabel(xg, yg, dimensions) {
 	const { width, height } = dimensions;
 	xg.append("text")
-	  .attr("fill", "black")
+	  .attr("class", "label")
 	  .text("Year (Quaterly from 1947 to 2015)")
 	  .attr("x", width/2)
-	  .attr("y", 35);
+	  .attr("y", 45);
 
 	yg.append("text")
-	  .attr("fill", "black")
+	  .attr("class", "label")
 	  .text("Gross Domestic Product (billions of dollars)")
-	  .attr("class", "y-label")
-	  .attr("x", -(height-200)/2)
+	  .attr("x", -(height-350)/2)
 	  .attr("y", -50)
 	  .attr("transform", `rotate(-90)`);
 }

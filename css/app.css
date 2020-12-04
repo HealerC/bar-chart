@@ -36,6 +36,8 @@ a:hover, a:active {
 #bar-chart {
 	width: 90vw;
 	height: 80vh;
+	display: block;
+	margin: auto;
 }
 /*
 @media (min-width: 992px) {
@@ -62,11 +64,11 @@ div.tooltip {
 
 body {
 	background-color: var(--dark-blue);
-	color: white;
-	fill: white;
+	color: var(--white);
+	fill: var(--white);
 }
 text {
-	fill:white;
+	fill: var(--white);
 }
 
 /* Header */
@@ -87,5 +89,12 @@ rect {
 	fill: #007CC7;
 }
 rect:hover {
+	fill: var(--light-blue);
+}
+g text {
+	font-size: larger;
+}
+.label {
+	font-size: 1.7em;
 	fill: var(--light-blue);
 }
