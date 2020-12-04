@@ -28,24 +28,25 @@ function renderData(data) {
 	const xScale = d3.scaleBand()
 					 .domain(data.map(d => d[0]))
 					 .range([padding, width - padding])
-					 .padding(0.3)
-					 .round(true);
+					 .padding(0.2)
+					 .round(true)
+					 .align(0.1);
 	const yScale = d3.scaleLinear()
 					 .domain([0, d3.max(data.map(d => d[1]))])
 					 .range([height - padding, padding]);
 
-	svg.selectAll("rect")
-	   .data(data)
-	   .enter()
-	   .append("rect")
-	   .attr("x", (d) => xScale(d[0]))
-	   .attr("y", (d) => yScale(d[1]))
-	   .attr("width", xScale.bandwidth())
-	   .attr("height", (d) => height-padding - yScale(d[1]))
+	const bars = svg.selectAll("rect")
+	   				.data(data)
+					.enter()
+					.append("rect")
+					.attr("x", (d) => xScale(d[0]))
+					.attr("y", (d) => yScale(d[1]))
+					.attr("width", xScale.bandwidth())
+					.attr("height", (d) => height-padding - yScale(d[1]))
 
 	const { xg, yg } = renderAxis(svg, xScale, yScale, { height, padding });
 	renderAxisLabel(xg, yg, { width, height });
-
+	renderTooltip(bars);
 }
 
 function renderAxis(svg, xScale, yScale, dimensions) {
@@ -104,4 +105,55 @@ function renderAxisLabel(xg, yg, dimensions) {
 	  .attr("x", -(height-200)/2)
 	  .attr("y", -50)
 	  .attr("transform", `rotate(-90)`);
+}
+
+function renderTooltip(bars) {
+	const tooltip = d3.select("body")
+					   .append("div")
+					   .attr("class", "tooltip")
+					   .style("opacity", 0);
+	
+	bars.on("mouseover", function(event, d) {
+		let tooltipDisplay = getDisplay(d);
+		//console.log(tooltipDisplay);
+		tooltip.style("opacity", 1)
+		       .html(getDisplay(d))
+		       .style("left", (event.pageX+30) + "px")
+	      	   .style("top", (0.6*screen.availHeight) + "px");
+	})
+	.on("mouseout", () => {
+		tooltip.style("opacity", 0);
+	})
+
+	function getDisplay(d) {
+		let output = "";
+		let date = new Date(d[0]);
+
+		output += date.getFullYear();
+		
+		const month = date.getMonth();
+
+		output += " Q";
+		switch (month) {
+			case 0:
+				output += 1;
+				break;
+			case 3:
+				output += 2;
+				break;
+			case 6:
+				output += 3;
+				break;
+			case 9:
+				output += 4;
+				break;
+			default:
+				output += 0;
+		}
+
+		output += "<br />";
+		output += `${d[1]} billion`;
+
+		return output;
+	}
 }
