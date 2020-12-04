@@ -1,8 +1,42 @@
+:root {
+	--light-blue: #4DA8DA;
+	--white: #EEFBFB;
+	font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+}
+
+.tippy-box[data-theme~="light"] {
+	background-color: white;
+	font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+	color: black;
+}
+.tippy-box[data-theme~='light'][data-placement^='top'] > .tippy-arrow::before {
+  	border-top-color: white;
+}
+.tippy-box[data-theme~='light'][data-placement^='bottom'] > .tippy-arrow::before {
+  	border-bottom-color: white;
+}
+.tippy-box[data-theme~='light'][data-placement^='left'] > .tippy-arrow::before {
+  	border-left-color: white;
+}
+.tippy-box[data-theme~='light'][data-placement^='right'] > .tippy-arrow::before {
+  	border-right-color: white;
+}
+
+
+a:link, a:visited {
+	text-decoration: none;
+	color: var(--light-blue);
+}
+a:hover, a:active {
+	text-decoration: underline;
+	text-decoration-style: dashed;
+}
+
 #bar-chart {
 	width: 90vw;
 	height: 80vh;
 }
-
+/*
 @media (min-width: 992px) {
 	#bar-chart {
 		width: 70vw;
@@ -13,7 +47,7 @@
 		width: 80vw;
 	}
 }
-
+*/
 div.tooltip {
 	position: absolute;
     text-align: center;
@@ -24,4 +58,25 @@ div.tooltip {
     border-radius: 8px;
     pointer-events: none;
     font-size: 1.3rem;
+}
+
+
+body {
+	background-color: #12232E;
+	color: white;
+	fill: white;
+}
+text {
+	fill:white;
+}
+header {
+	text-align: center;
+}
+header h1 {
+	font-weight: 500;
+	line-height: 0;
+	margin-top: 1em;
+}
+header p {
+	color: hsla(180, 62%, 96%, 0.5);}
 }

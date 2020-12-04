@@ -3,7 +3,8 @@ tippy("#more-info", {
 			  (NIPA)<br /><a href="http://www.bea.gov/national/pdf/nipaguid.pdf" target="_blank">
 			  			http://www.bea.gov/national/pdf/nipaguid.pdf</a>`,
 	interactive: true,
-	allowHTML: true
+	allowHTML: true,
+	theme: "light"
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -28,7 +29,7 @@ function renderData(data) {
 	const xScale = d3.scaleBand()
 					 .domain(data.map(d => d[0]))
 					 .range([padding, width - padding])
-					 .padding(0.2)
+					 .padding(0.5)
 					 .round(true)
 					 .align(0.1);
 	const yScale = d3.scaleLinear()
