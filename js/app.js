@@ -8,12 +8,19 @@ tippy("#more-info", {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
+	let dataset = [];
 
 	fetch("./GDP-data.json")
 	    .then(result => result.json())
 	    .then(data => {
-	    	renderData(data.data);
+	    	dataset = data.data;
+	    	renderData(dataset);
 	    });
+
+	window.onresize = function() {
+		d3.select("svg").selectAll("*").remove();
+		renderData(dataset);
+	}
 });
 
 function renderData(data) {
