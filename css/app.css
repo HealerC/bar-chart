@@ -1,5 +1,6 @@
 :root {
 	--light-blue: #4DA8DA;
+	--dark-blue: #12232E;
 	--white: #EEFBFB;
 	font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
 }
@@ -52,23 +53,23 @@ div.tooltip {
 	position: absolute;
     text-align: center;
     padding: .5rem;
-    background: #FFFFFF;
-    color: #313639;
-    border: 1px solid #313639;
-    border-radius: 8px;
+    background: hsla(210, 3%, 75%, 0.5);
+    color: var(--dark-blue);
     pointer-events: none;
-    font-size: 1.3rem;
+    font-size: 1em;
 }
 
 
 body {
-	background-color: #12232E;
+	background-color: var(--dark-blue);
 	color: white;
 	fill: white;
 }
 text {
 	fill:white;
 }
+
+/* Header */
 header {
 	text-align: center;
 }
@@ -78,5 +79,13 @@ header h1 {
 	margin-top: 1em;
 }
 header p {
-	color: hsla(180, 62%, 96%, 0.5);}
+	color: hsla(180, 62%, 96%, 0.5);
+}
+
+/* The Bar Chart */
+rect {
+	fill: #007CC7;
+}
+rect:hover {
+	fill: var(--light-blue);
 }
