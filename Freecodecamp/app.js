@@ -10,7 +10,7 @@ tippy("#more-info", {
 document.addEventListener("DOMContentLoaded", function() {
 	let dataset = [];
 
-	fetch("./GDP-data.json")
+	fetch("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json")
 	    .then(result => result.json())
 	    .then(data => {
 	    	dataset = data.data;
@@ -51,14 +51,10 @@ function renderData(data) {
 					.attr("data-date", (d) => d[0])
 					.attr("data-gdp", (d) => d[1])
 					.attr("x", (d) => xScale(d[0]))
-					.attr("y", height-padding)
+					.attr("y", (d) => yScale(d[1]))
 					.attr("width", xScale.bandwidth())
-					.attr("height", 0);
+					.attr("height", (d) => height-padding - yScale(d[1]))
 
-	bars.transition().duration(1000)
-		.attr("y", (d) => yScale(d[1]))
-		.attr("height", (d) => height-padding - yScale(d[1]))
-	
 	const { xg, yg } = renderAxis(svg, xScale, yScale, { height, padding });
 	renderAxisLabel(xg, yg, { width, height });
 	renderTooltip(bars);
