@@ -47,6 +47,9 @@ function renderData(data) {
 	   				.data(data)
 					.enter()
 					.append("rect")
+					.attr("class", "bar")
+					.attr("data-date", (d) => d[0])
+					.attr("data-gdp", (d) => d[1])
 					.attr("x", (d) => xScale(d[0]))
 					.attr("y", (d) => yScale(d[1]))
 					.attr("width", xScale.bandwidth())
@@ -67,10 +70,12 @@ function renderAxis(svg, xScale, yScale, dimensions) {
 	const yAxis = d3.axisLeft(yScale);
 
 	const xg = svg.append("g")
+				  .attr("id", "x-axis")
 	   			  .attr("transform", `translate(0, ${height-padding})`)
 	   			  .call(xAxis);
 
 	const yg = svg.append("g")
+				  .attr("id", "y-axis")
 	   			  .attr("transform", `translate(${padding}, 0)`)
 	              .call(yAxis);
 
@@ -117,19 +122,20 @@ function renderAxisLabel(xg, yg, dimensions) {
 function renderTooltip(bars) {
 	const tooltip = d3.select("body")
 					   .append("div")
-					   .attr("class", "tooltip")
-					   .style("opacity", 0);
+					   .attr("id", "tooltip")
+					   .style("visibility", "hidden");
 	
 	bars.on("mouseover", function(event, d) {
 		let tooltipDisplay = getDisplay(d);
 		//console.log(tooltipDisplay);
-		tooltip.style("opacity", 1)
+		tooltip.style("visibility", "visible")
 		       .html(getDisplay(d))
+		       .attr("data-date", d[0])
 		       .style("left", (event.pageX+30) + "px")
 	      	   .style("top", (0.6*screen.availHeight) + "px");
 	})
 	.on("mouseout", () => {
-		tooltip.style("opacity", 0);
+		tooltip.style("visibility", "hidden");
 	})
 
 	function getDisplay(d) {

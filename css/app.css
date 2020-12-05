@@ -54,7 +54,7 @@ a:hover, a:active {
 	}
 }
 */
-div.tooltip {
+div#tooltip {
 	position: absolute;
     text-align: center;
     padding: .5rem;
