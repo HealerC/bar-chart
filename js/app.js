@@ -16,11 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	    	dataset = data.data;
 	    	renderData(dataset);
 	    });
-
-	window.onresize = function() {
-		d3.select("svg").selectAll("*").remove();
-		renderData(dataset);
-	}
 });
 
 function renderData(data) {
