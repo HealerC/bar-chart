@@ -36,7 +36,7 @@ function renderData(data) {
 	const xScale = d3.scaleBand()
 					 .domain(data.map(d => d[0]))
 					 .range([padding, width - padding])
-					 .padding(0.5)
+					 .padding(0.3)
 					 .round(true)
 					 .align(0.1);
 	const yScale = d3.scaleLinear()
