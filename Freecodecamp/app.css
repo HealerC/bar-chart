@@ -97,3 +97,18 @@ g text {
 	font-size: 1.7em;
 	fill: var(--light-blue);
 }
+
+/* About block */
+#about {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	opacity: 0.5;
+	text-align: right;
+}
+#about #instruction {
+	line-height: 0;
+}
+#about #about-me {
+	line-height: 0.1;
+}

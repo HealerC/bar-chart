@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
      * The dataset used is the one given by Freecodecamp and it contains
      * the GDP of the United States on the four quarters of the year.   
 	 */
-	fetch("./GDP-data.json")
+	fetch("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json")
 	    .then(result => result.json())
 	    .then(data => {
 	    	const dataset = data.data;	// A two dimensional array of Date and GDP
@@ -92,6 +92,7 @@ function renderData(data) {
 	renderAxisLabel(xg, yg, { width, height });
 	
 	renderTooltip(bars);				// The tooltip that shows on mouseover the bars
+	addDateToClipboard(bars);
 }
 
 /**
@@ -272,5 +273,39 @@ function renderTooltip(bars) {
 		output += `${d[1]} billion`;	// The GDP for the particular quarter
 
 		return output;		// The Quarter of the year and GDP formatted as in HTML
+	}
+}
+/**
+ * @method addDateToClipboard adds the date the person doubleclicks to the clipboard
+ * @param {Object} bars the rect d3 selection that the person doubleclicked
+ */
+function addDateToClipboard(bars) {
+	bars.on("dblclick", function(event, data) {
+		const value = `Date: ${data[0]}, GDP: $${data[1]} billion`;  // Format of the data
+		copyToClipboard(value);
+	});
+
+	/*
+   	 * @method copyToClipboard copies a value to clipboard
+   	 * @param {string} the value to be copied to the clipboard
+	 */
+	function copyToClipboard(value) {
+		/*
+		 * A technique of copying text to clipboard is to select text in a textbox
+		 * and copy it to the keyboard. A dummy text input box is made to accomodate
+		 * the text and from here it is copied to the clipboard.
+		 */
+		const test = document.createElement("input");	// Creates the textbox
+		document.body.appendChild(test);				// Appends it to a document
+		test.setAttribute("id", "test");	// Gives it an id in case of customization
+		test.style.visibliity = "hidden";	// Hides it so it is not seen in the page
+
+		document.getElementById("test").value = value;
+		test.select();						// The element is first selected
+		document.execCommand("copy");		// The command that actually copies the text
+
+		alert(`"${value}"` + " copied to clipboard");	// Text that displays after copying
+
+		document.body.removeChild(test);	// We don't need the element anymore
 	}
 }
